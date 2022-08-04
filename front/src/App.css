@@ -1,8 +1,5 @@
 html,
 body{
-  height: 100vh;
-}
-
-.box{
-    height: 100vh;
+  height: 100%;
+  background-color: rgb(217, 243, 235);
 }

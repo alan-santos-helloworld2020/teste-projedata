@@ -6,16 +6,16 @@ export default function Navebar() {
     M.AutoInit();
   });
   return (
-    <>
+    <div>
       <nav>
-        <div class="nav-wrapper">
-          <a href="#!" class="brand-logo center" style={{fontWeight:"bold"}}>
+        <div className="nav-wrapper">
+          <a href="#!" className="brand-logo center" style={{fontWeight:"bold"}}>
             Sistema
           </a>
-          <a href="#" data-target="mobile-demo" class="sidenav-trigger">
-            <i class="material-icons">menu</i>
+          <a href="#" data-target="mobile-demo" className="sidenav-trigger">
+            <i className="material-icons">menu</i>
           </a>
-          <ul class="right hide-on-med-and-down">
+          <ul className="right hide-on-med-and-down">
             <li>
               <Link to={"/"}>Home</Link>
             </li>
@@ -29,7 +29,7 @@ export default function Navebar() {
         </div>
       </nav>
 
-      <ul class="sidenav" id="mobile-demo">
+      <ul className="sidenav" id="mobile-demo">
         <li>
           <Link to={"/"}>Home</Link>
         </li>
@@ -40,6 +40,6 @@ export default function Navebar() {
           <Link to={"/materiaprima"}>Materia-Prima</Link>
         </li>
       </ul>
-    </>
+    </div>
   );
 }

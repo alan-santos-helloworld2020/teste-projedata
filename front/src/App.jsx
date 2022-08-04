@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import Produto from "./produto/Produto";
 import MateriaPrima from "./materia-prima/MaterialPrima";
 import Navebar from "./components/Navebar";
+import Home from "./home/Home";
 
 function App() {
   useEffect(() => {
@@ -16,6 +17,7 @@ function App() {
     <div className="box">
       <Navebar></Navebar>
       <Routes>
+        <Route path={"/"} element={<Home></Home>}></Route>
         <Route path={"/produto"} element={<Produto></Produto>}></Route>
         <Route
           path={"/materiaprima"}

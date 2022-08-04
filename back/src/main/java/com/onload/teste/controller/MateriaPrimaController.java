@@ -6,6 +6,8 @@ package com.onload.teste.controller;
 
 import com.onload.teste.models.MateriaPrima;
 import com.onload.teste.repository.MateriaPrimaRepository;
+import com.onload.teste.service.MateriaPrimaService;
+
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +32,18 @@ public class MateriaPrimaController {
     
     @Autowired
     private MateriaPrimaRepository repo;
+    @Autowired
+    private MateriaPrimaService service;
     
     @GetMapping("/")
     public ResponseEntity<List<MateriaPrima>> findAll(){
         
-        return ResponseEntity.ok(repo.findAll());
+        return ResponseEntity.ok(service.findAll());
     
     }
     @GetMapping("/{id}")
     public ResponseEntity<MateriaPrima> findById(@PathVariable("id") Long id) {
-        Optional<MateriaPrima> find = repo.findById(id);
+        Optional<MateriaPrima> find = service.findById(id);
         if (find.isEmpty()) {
             return ResponseEntity.notFound().build();
         } else {
@@ -50,7 +54,7 @@ public class MateriaPrimaController {
 
     @PostMapping("/")
     public ResponseEntity<MateriaPrima> save(@RequestBody() MateriaPrima materiaprima) {
-        var save = repo.save(materiaprima);
+        var save = service.save(materiaprima);
         if (save.equals(null)) {
             return ResponseEntity.badRequest().build();
         } else {
@@ -60,23 +64,20 @@ public class MateriaPrimaController {
 
     @PutMapping("/{id}")
     public ResponseEntity<MateriaPrima> update(@PathVariable("id") Long id,@RequestBody() MateriaPrima materiaprima) {
-        Optional<MateriaPrima> find = repo.findById(id);
-        if (find.isEmpty()) {
+        MateriaPrima update = service.update(id,materiaprima);
+        if (update.equals(null)) {
             return ResponseEntity.notFound().build();
         } else {
-            find.get().setName(materiaprima.getName());
-            find.get().setInventory(materiaprima.getInventory());
-            return new ResponseEntity<>(repo.save(find.get()), HttpStatus.CREATED);
+            return new ResponseEntity<>(update, HttpStatus.CREATED);
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<List<MateriaPrima>> delete(@PathVariable("id") Long id) {
-        Optional<MateriaPrima> find = repo.findById(id);
-        if (find.isEmpty()) {
+        MateriaPrima find = service.delete(id);
+        if (find.equals(null)) {
             return ResponseEntity.notFound().build();
         } else {
-            repo.delete(find.get());
             return ResponseEntity.ok(repo.findAll());
         }
     }

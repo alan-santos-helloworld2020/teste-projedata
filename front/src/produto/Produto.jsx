@@ -12,8 +12,7 @@ export default function Produto() {
   useEffect(() => {
     ApiProdutoFetch.get().then((data) => {
       setProduto(data);
-    });
-    console.log(produto);
+    });    
   });
 
   function deletar(id) {

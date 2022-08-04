@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import ModalEditMateriaPrima from "../components/ModalEditMateriaPrima";
 import ApiMateriaPrimaFetch from "../services/HttpServiceMateriaPrima";
+import M from 'materialize-css';
 
 export default function MateriaPrima() {
   const [materia, setMateria] = useState([]);
+  const [edit, setEdit] = useState({
+    id:null,
+    name:null,
+    inventory:null,
+  });
 
   useEffect(() => {
     ApiMateriaPrimaFetch.get()
       .then((data) => setMateria(data))
       .catch((err) => console.log(err.message));
-    console.log(materia);
+
   });
 
   function deletar(id) {
@@ -62,7 +69,10 @@ export default function MateriaPrima() {
                   </a>
                 </td>
                 <td>
-                  <a className="btn btn-floating blue waves-effect waves-light">
+                  <a className="blue waves-effect waves-light btn-floating modal-trigger"
+                  href="#modalEdit"
+                  onClick={() => setEdit(mt)}
+                  >
                     <i className="material-icons">edit</i>
                   </a>
                 </td>
@@ -70,6 +80,7 @@ export default function MateriaPrima() {
             ))}
           </tbody>
         </table>
+        <ModalEditMateriaPrima edit={edit}></ModalEditMateriaPrima>
       </div>
     </div>
   );
