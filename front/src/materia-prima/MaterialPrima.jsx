@@ -2,21 +2,21 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import ModalEditMateriaPrima from "../components/ModalEditMateriaPrima";
 import ApiMateriaPrimaFetch from "../services/HttpServiceMateriaPrima";
-import M from 'materialize-css';
+import M from "materialize-css";
+import FormSaveMateriaPrima from "../components/FormSaveMateriaPrima";
 
 export default function MateriaPrima() {
   const [materia, setMateria] = useState([]);
   const [edit, setEdit] = useState({
-    id:null,
-    name:null,
-    inventory:null,
+    id: null,
+    name: null,
+    inventory: null,
   });
 
   useEffect(() => {
     ApiMateriaPrimaFetch.get()
       .then((data) => setMateria(data))
       .catch((err) => console.log(err.message));
-
   });
 
   function deletar(id) {
@@ -34,13 +34,17 @@ export default function MateriaPrima() {
       }
     });
   }
-
+  function openModalEditMateriaPrima(mt){
+    M.AutoInit();
+    M.Modal.getInstance(document.querySelector("#modalEdit")).open();
+    setEdit(mt);
+  } 
   return (
     <div className="row">
+      <p className="center" style={{fontWeight:"bold"}}>Cadastro de Materia Prima</p>
+      <FormSaveMateriaPrima></FormSaveMateriaPrima>
+
       <div className="col s12 l8 push-l2">
-        <p className="center" style={{ fontWeight: "bold" }}>
-          Cadastro de Materia-Prima
-        </p>
         <table
           className="responsive-table centered striped"
           style={{ marginTop: "50px", width: "100%" }}
@@ -69,9 +73,10 @@ export default function MateriaPrima() {
                   </a>
                 </td>
                 <td>
-                  <a className="blue waves-effect waves-light btn-floating modal-trigger"
-                  href="#modalEdit"
-                  onClick={() => setEdit(mt)}
+                  <a
+                    className="blue waves-effect waves-light btn-floating modal-trigger"
+                    href="#modalEdit"
+                    onClick={() => openModalEditMateriaPrima(mt) }
                   >
                     <i className="material-icons">edit</i>
                   </a>

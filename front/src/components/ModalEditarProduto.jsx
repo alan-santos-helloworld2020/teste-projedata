@@ -3,26 +3,26 @@ import M from "materialize-css";
 import ProdutoValidations from "../validation/ProdutoValidations";
 
 export default function ModalEditarProduto(props) {
-  const [produto, setProduto] = useState({
-    name: null,
-    price: null,
+  const [produtoSave, setProdutoSave] = useState({
+    id:null,
+    name:null,
+    inventory:null,
   });
 
   useEffect(() => {
     M.AutoInit();
-    setProduto(props.edit);
+    setProdutoSave(props.edit);
   }, [props.edit]);
 
   function update() {
-    ProdutoValidations.Update(produto);
-    var modal = document.querySelector("#modalEdit");
-    var instance = M.Modal.getInstance(modal);
+    ProdutoValidations.Update(produtoSave);
+    M.AutoInit();
+    var instance = M.Modal.getInstance(document.querySelector("#modalEditPD"));
     instance.close();
   }
 
   return (
-    <>
-      <div id="modalEdit" className="modal">
+      <div id="modalEditPD" className="modal">
         <div className="modal-content">
           <div className="row">
             <div className="title h3 center">Editar Produto</div>
@@ -31,9 +31,9 @@ export default function ModalEditarProduto(props) {
               <i className="material-icons prefix">person</i>
               <input
                 type="text"
-                value={produto.name}
+                value={produtoSave.name}
                 onChange={(e) =>
-                  setProduto({ ...produto, name: e.target.value })
+                  setProdutoSave({ ...produtoSave, name: e.target.value })
                 }
                 name="name"
                 id="name"
@@ -47,9 +47,9 @@ export default function ModalEditarProduto(props) {
               <i className="material-icons prefix">money</i>
               <input
                 type="text"
-                value={produto.price}
+                value={produtoSave.price}
                 onChange={(e) =>
-                  setProduto({ ...produto, price: e.target.value })
+                  setProdutoSave({ ...produtoSave, price: e.target.value })
                 }
                 name="price"
                 id="price"
@@ -71,6 +71,5 @@ export default function ModalEditarProduto(props) {
           </div>
         </div>
       </div>
-    </>
-  );
+   );
 }

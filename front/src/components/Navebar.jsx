@@ -4,17 +4,21 @@ import { Link } from "react-router-dom";
 export default function Navebar() {
   useEffect(() => {
     M.AutoInit();
-  });
+  },[]);
   return (
     <div>
       <nav>
         <div className="nav-wrapper">
-          <a href="#!" className="brand-logo center" style={{fontWeight:"bold"}}>
+          <Link
+            to={"/"}
+            className="brand-logo center"
+            style={{ fontWeight: "bold" }}
+          >
             Sistema
-          </a>
-          <a href="#" data-target="mobile-demo" className="sidenav-trigger">
+          </Link>
+          <Link to={"#"} data-target="mobile-demo" className="sidenav-trigger">
             <i className="material-icons">menu</i>
-          </a>
+          </Link>
           <ul className="right hide-on-med-and-down">
             <li>
               <Link to={"/"}>Home</Link>
@@ -24,6 +28,9 @@ export default function Navebar() {
             </li>
             <li>
               <Link to={"/materiaprima"}>Materia-Prima</Link>
+            </li>
+            <li>
+              <Link to={"/detalhes"}>Detalhes</Link>
             </li>
           </ul>
         </div>
@@ -38,6 +45,9 @@ export default function Navebar() {
         </li>
         <li>
           <Link to={"/materiaprima"}>Materia-Prima</Link>
+        </li>
+        <li>
+          <Link to={"/detalhes"}>Detalhes</Link>
         </li>
       </ul>
     </div>

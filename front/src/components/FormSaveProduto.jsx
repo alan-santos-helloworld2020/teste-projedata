@@ -1,24 +1,26 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import ProdutoValidations from "../validation/ProdutoValidations";
 
 export default function FormSaveProduto() {
- 
+
   const [produto, setProduto] = useState({
     name: "",
-    price: "",
+    price: 0
   });
+
+  useEffect(()=>{
+      
+  },[])
 
   function save(){
     ProdutoValidations.Save(produto)
     setProduto({
       name: "",
-      price: "",
+      price: 0,
     })
-
   }
 
   return (
-    <div className="row">
     <form className="col l8 push-l2"  style={{marginTop:"2%"}}>
        <div className="input-field col s12">
           <i className="material-icons prefix">person</i>
@@ -30,7 +32,7 @@ export default function FormSaveProduto() {
             id="name"
           />
           <label htmlFor="name" className="active">
-            Name
+            Nome
           </label>
         </div>
         
@@ -44,7 +46,7 @@ export default function FormSaveProduto() {
             id="price"
           />
           <label htmlFor="name" className="active">
-            Price
+            Preço
           </label>
         </div>
 
@@ -54,11 +56,10 @@ export default function FormSaveProduto() {
             className="btn btn-small modal-close waves-effect waves-green right"
             onClick={()=>save()}
           >
-            save
+            salvar
             <i className="material-icons left">send</i>
           </button>
         </div>
     </form>
-    </div>
   );
 }

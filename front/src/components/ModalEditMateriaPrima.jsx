@@ -19,8 +19,7 @@ export default function ModalEditMateriaPrima(props) {
   }
 
   return (
-    <>
-    <div id="modalEdit" className="modal">
+     <div id="modalEdit" className="modal">
       <div className="modal-content">
       <div className="title h3 center">Editar Matateria Prima</div>
         <div className="row">
@@ -70,6 +69,5 @@ export default function ModalEditMateriaPrima(props) {
         </div>
       </div>
     </div>
-    </>
   );
 }

@@ -2,7 +2,8 @@ const url = "http://localhost:8080/produto/";
 const headers = {"content-type":"application/json"};
 
 const ApiProdutoFetch = {
-    get:()=> fetch(url,{headers}).then(res=>res.json()),
+
+    get:()=> fetch(url,{metho:"GET",headers}).then(res=>res.json()),
 
     getById:(param)=> fetch(url+param,{headers}).then(res=>res.json()),
 
