@@ -5,7 +5,6 @@
 package com.onload.teste.controller;
 
 import com.onload.teste.models.MateriaPrima;
-import com.onload.teste.repository.MateriaPrimaRepository;
 import com.onload.teste.service.MateriaPrimaService;
 
 import java.util.List;
@@ -31,8 +30,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class MateriaPrimaController {
     
     @Autowired
-    private MateriaPrimaRepository repo;
-    @Autowired
     private MateriaPrimaService service;
     
     @GetMapping("/")
@@ -41,13 +38,14 @@ public class MateriaPrimaController {
         return ResponseEntity.ok(service.findAll());
     
     }
+    
     @GetMapping("/{id}")
     public ResponseEntity<MateriaPrima> findById(@PathVariable("id") Long id) {
         Optional<MateriaPrima> find = service.findById(id);
         if (find.isEmpty()) {
             return ResponseEntity.notFound().build();
         } else {
-            var res = repo.findById(id).orElse(null);
+            var res = service.findById(id).orElse(null);
             return ResponseEntity.ok(res);
         }
     }
@@ -78,7 +76,7 @@ public class MateriaPrimaController {
         if (find.equals(null)) {
             return ResponseEntity.notFound().build();
         } else {
-            return ResponseEntity.ok(repo.findAll());
+            return ResponseEntity.ok(service.findAll());
         }
     }
 }
